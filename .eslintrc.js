@@ -32,9 +32,9 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'indent': ['error', 2], // Enforce two-space indentation
     'object-curly-spacing': ['error', 'always'], // Enforce spacing inside of curly braces
-    'array-bracket-spacing': ['error', 'always'], // Enforce spacing inside of array brackets
+    'array-bracket-spacing': ['error', 'never'], // Enforce spacing inside of array brackets
     'block-spacing': ['error', 'always'], // Enforce spacing inside of single-line blocks
-    'space-in-parens': ['error', 'always'], // Enforce spacing inside of parentheses
+    'space-in-parens': ['error', 'never'], // Enforce spacing inside of parentheses
     'key-spacing': ['error', { beforeColon: false, afterColon: true }], // Enforce spacing around object keys
     'keyword-spacing': ['error', { before: true, after: true }], // Enforce spacing before and after keywords
     'comma-spacing': ['error', { before: false, after: true }], // Enforce spacing before and after commas
