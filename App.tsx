@@ -5,17 +5,13 @@
  */
 
 import React from 'react'
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native'
-
+import { SafeAreaView, StatusBar, Text, useColorScheme } from 'react-native'
+import { Provider } from 'react-redux'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 
-const App = () => {
+import store from './src/redux/store'
+
+const App = (): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark'
 
   const backgroundStyle = {
@@ -23,15 +19,15 @@ const App = () => {
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Provider store={store}>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
         <Text>Hello World!</Text>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </Provider>
   )
 }
 
