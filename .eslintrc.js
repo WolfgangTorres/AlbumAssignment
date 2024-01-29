@@ -27,7 +27,7 @@ module.exports = {
     'react-native/no-unused-styles': 'warn',
     'react-native/split-platform-components': 'warn',
     'react-native/no-inline-styles': 'off',
-    'react-native/no-color-literals': 'warn',
+    'react-native/no-color-literals': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'indent': ['error', 2], // Enforce two-space indentation
