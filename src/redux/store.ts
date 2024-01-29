@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
-import usersReducer from './usersSlice'
-import albumsReducer from './albumsSlice'
-import photosReducer from './photosSlice'
+import usersReducer from './users.slice'
+import albumsReducer from './albums.slice'
+import photosReducer from './photos.slice'
 
 const rootReducer = combineReducers({
   users: usersReducer,
