@@ -4,8 +4,11 @@ export interface Album {
   title: string
 }
 
+export type AlbumItem = Album
+
 export interface AlbumsState {
-  albums: Album[]
+  albumsByUserId: { [key: number]: Album[] }
+  loadingUserIds: number[]
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error: string | null | undefined
 }

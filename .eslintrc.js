@@ -53,7 +53,7 @@ module.exports = {
       // Enable the rule specifically for TypeScript files
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': ['warn', {
+        '@typescript-eslint/explicit-function-return-type': ['off', {
           allowExpressions: true, // allows concise arrow functions with inferred return types
           allowTypedFunctionExpressions: true,
         }],
