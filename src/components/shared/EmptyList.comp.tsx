@@ -4,6 +4,17 @@ import { useTheme } from '@react-navigation/native'
 
 import { EmptyListComponentProps } from '../../utils/interfaces'
 
+/**
+ * EmptyListComponent
+ *
+ * A functional component that renders an activity indicator when data is being loaded
+ * or a message when there's no data to display. It utilizes the color scheme from the app's theme
+ * for styling.
+ *
+ * Props:
+ *  - loading (boolean): Indicates whether data is being loaded. If true, an activity indicator is shown.
+ *  - emptyMessage (string): The message to display when there is no data.
+ */
 const EmptyListComponent: React.FC<EmptyListComponentProps> = ({
   loading,
   emptyMessage,
