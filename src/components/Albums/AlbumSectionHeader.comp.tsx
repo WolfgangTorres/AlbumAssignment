@@ -1,12 +1,12 @@
+import React from 'react'
+import { Text, StyleSheet } from 'react-native'
+import { useTheme } from '@react-navigation/native'
+
 /**
  * Album Section Header Component
  *
  * This component renders the header for the sections of the albums list categorized by users.
  */
-import React from 'react'
-import { Text, StyleSheet } from 'react-native'
-import { useTheme } from '@react-navigation/native'
-
 const AlbumSectionHeaderComponent: React.FC<{ title: string }> = ({
   title,
 }) => {

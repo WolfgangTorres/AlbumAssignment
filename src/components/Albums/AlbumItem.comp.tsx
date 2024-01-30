@@ -1,8 +1,3 @@
-/**
- * Album Item Component
- *
- * This component renders the row for the list of albums categorized by users.
- */
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { useNavigation, useTheme } from '@react-navigation/native'
@@ -10,6 +5,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { AlbumItem, RootStackParamList } from '../../utils/interfaces'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+/**
+ * Album Item Component
+ *
+ * This component renders the row for the list of albums categorized by users.
+ */
 const AlbumItemComponent: React.FC<{
   item: AlbumItem
   onDelete: (userId: number, albumId: number) => void
