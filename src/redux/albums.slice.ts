@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { AlbumsState } from '../utils/interfaces'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { Album, AlbumsState } from '../utils/interfaces'
 import { fetchAlbums } from '../api/album.api'
 
 const initialState: AlbumsState = {
@@ -12,7 +12,18 @@ const initialState: AlbumsState = {
 const albumsSlice = createSlice({
   name: 'albums',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteAlbum: (
+      state,
+      action: PayloadAction<{ userId: number; albumId: number }>,
+    ) => {
+      const { userId, albumId } = action.payload
+      const filteredAlbums = state.albumsByUserId[userId].filter(
+        (album: Album) => album.id !== albumId,
+      )
+      state.albumsByUserId[userId] = filteredAlbums
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAlbums.pending, (state, action) => {
@@ -40,4 +51,5 @@ const albumsSlice = createSlice({
   },
 })
 
+export const { deleteAlbum } = albumsSlice.actions
 export default albumsSlice.reducer

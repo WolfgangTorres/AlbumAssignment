@@ -15,6 +15,7 @@ import { fetchAlbums } from '../../api/album.api'
 import { fetchUsers } from '../../api/user.api'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 import { AlbumItem, AlbumSectionHeader } from '../../components/Albums'
+import { deleteAlbum } from '../../redux/albums.slice'
 
 const AlbumsScreen: React.FC = () => {
   // Dispatch and theme hooks
@@ -60,6 +61,10 @@ const AlbumsScreen: React.FC = () => {
     [dispatch, albumsByUserId, loadingUserIds],
   )
 
+  const handleDeleteAlbum = (userId: number, albumId: number) => {
+    dispatch(deleteAlbum({ userId, albumId }))
+  }
+
   // Map users to sections for the SectionList
   const sections = users.map((user) => ({
     userId: user.id,
@@ -74,7 +79,9 @@ const AlbumsScreen: React.FC = () => {
       showsVerticalScrollIndicator={false}
       sections={sections}
       keyExtractor={(item, index) => `${item?.userId}${index}`}
-      renderItem={({ item }) => <AlbumItem item={item} />}
+      renderItem={({ item }) => (
+        <AlbumItem item={item} onDelete={handleDeleteAlbum} />
+      )}
       renderSectionHeader={({ section }) => (
         <AlbumSectionHeader title={section.title} />
       )}

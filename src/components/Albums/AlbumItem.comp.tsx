@@ -10,13 +10,21 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { AlbumItem, RootStackParamList } from '../../utils/interfaces'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-const AlbumItemComponent: React.FC<{ item: AlbumItem }> = ({ item }) => {
+const AlbumItemComponent: React.FC<{
+  item: AlbumItem
+  onDelete: (userId: number, albumId: number) => void
+}> = ({ item, onDelete }) => {
   // Theme hooks
   const { colors } = useTheme()
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
 
   const albumOnPress = () => {
     navigation.navigate('AlbumDetails', { albumId: item.id })
+  }
+
+  // Call the onDelete function when the delete button is tapped
+  const deleteOnPress = () => {
+    onDelete(item.userId, item.id)
   }
 
   return (
@@ -28,7 +36,7 @@ const AlbumItemComponent: React.FC<{ item: AlbumItem }> = ({ item }) => {
       <Text style={[styles.itemTitle, { color: colors.text }]}>
         {item.title}
       </Text>
-      <TouchableOpacity style={styles.deleteButton}>
+      <TouchableOpacity onPress={deleteOnPress} style={styles.deleteButton}>
         <Icon name="delete-outline" size={25} color={colors.text} />
       </TouchableOpacity>
     </TouchableOpacity>
