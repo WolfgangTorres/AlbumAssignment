@@ -1,7 +1,7 @@
 /**
- * AlbumsScreen Component
+ * Albums Screen
  *
- * This component renders a list of albums categorized by users. It fetches and displays users and their albums
+ * This screen renders a list of albums categorized by users. It fetches and displays users and their albums
  * using a SectionList. It implements lazy loading of albums data when a user section is visible.
  */
 import React, { useCallback, useEffect } from 'react'

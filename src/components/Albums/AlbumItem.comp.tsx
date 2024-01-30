@@ -5,17 +5,24 @@
  */
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { useTheme } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { AlbumItem } from '../../utils/interfaces'
+import { AlbumItem, RootStackParamList } from '../../utils/interfaces'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 const AlbumItemComponent: React.FC<{ item: AlbumItem }> = ({ item }) => {
   // Theme hooks
   const { colors } = useTheme()
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
+
+  const albumOnPress = () => {
+    navigation.navigate('AlbumDetails', { albumId: item.id })
+  }
 
   return (
     <TouchableOpacity
       style={[styles.item, { borderBottomColor: colors.border }]}
+      onPress={albumOnPress}
     >
       <Icon name="album" size={25} color={colors.text} style={styles.icon} />
       <Text style={[styles.itemTitle, { color: colors.text }]}>
