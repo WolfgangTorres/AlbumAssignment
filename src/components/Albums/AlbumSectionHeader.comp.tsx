@@ -13,24 +13,21 @@ const AlbumSectionHeaderComponent: React.FC<{ title: string }> = ({
   // Theme hooks
   const { colors } = useTheme()
 
-  return (
-    <Text
-      style={[
-        styles.sectionHeader,
-        { backgroundColor: colors.card, color: colors.text },
-      ]}
-    >
-      {title}
-    </Text>
-  )
+  const headerStyle = StyleSheet.compose(styles.sectionHeader, {
+    backgroundColor: colors.card,
+    color: colors.text,
+  })
+
+  return <Text style={headerStyle}>{title}</Text>
 }
 
 // Styles for the component
 const styles = StyleSheet.create({
   sectionHeader: {
-    padding: 10,
     fontSize: 24,
     fontWeight: 'bold',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
 })
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 
-import { EmptyListComponentProps } from '../../utils/interfaces'
+import { EmptyListComponentProps } from '../../utils/types'
 
 /**
  * EmptyListComponent
@@ -21,14 +21,19 @@ const EmptyListComponent: React.FC<EmptyListComponentProps> = ({
 }) => {
   const { colors } = useTheme()
 
+  // Styles
+  const containerStyle = StyleSheet.compose(styles.container, {
+    backgroundColor: colors.background,
+  })
+
+  const emptyTextStyle = StyleSheet.compose(styles.text, { color: colors.text })
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <View style={containerStyle}>
       {loading ? (
         <ActivityIndicator size="large" />
       ) : (
-        <Text style={[styles.text, { color: colors.text }]}>
-          {emptyMessage}
-        </Text>
+        <Text style={emptyTextStyle}>{emptyMessage}</Text>
       )}
     </View>
   )

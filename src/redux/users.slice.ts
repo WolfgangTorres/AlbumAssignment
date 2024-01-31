@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { UsersState } from '../utils/interfaces'
+import { UsersState } from '../utils/types'
 import { fetchUsers } from '../api/user.api'
 
 // Define the initial state of the users module with the UsersState type

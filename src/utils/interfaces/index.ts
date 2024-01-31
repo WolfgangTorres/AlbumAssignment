@@ -1,5 +1,0 @@
-export * from './users.interface'
-export * from './albums.interface'
-export * from './photos.interface'
-export * from './navigation.interface'
-export * from './shared.interface'

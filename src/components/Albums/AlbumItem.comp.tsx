@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { useNavigation, useTheme } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { AlbumItem, RootStackParamList } from '../../utils/interfaces'
+import { AlbumItem, RootStackParamList } from '../../utils/types'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 /**
@@ -19,7 +19,7 @@ const AlbumItemComponent: React.FC<{
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
 
   const albumOnPress = () => {
-    navigation.navigate('AlbumDetails', { albumId: item.id })
+    navigation.navigate('AlbumDetails', { album: item })
   }
 
   // Call the onDelete function when the delete button is tapped
@@ -27,16 +27,32 @@ const AlbumItemComponent: React.FC<{
     onDelete(item.userId, item.id)
   }
 
+  // Styles
+  const deleteButtonStyle = StyleSheet.compose(styles.deleteButton, {
+    backgroundColor: colors.notification,
+  })
+
+  const rowStyle = StyleSheet.compose(styles.item, {
+    borderBottomColor: colors.border,
+  })
+
+  const rowNameStyle = StyleSheet.compose(styles.itemTitle, {
+    color: colors.text,
+  })
+
   return (
     <TouchableOpacity
-      style={[styles.item, { borderBottomColor: colors.border }]}
+      style={rowStyle}
       onPress={albumOnPress}
+      activeOpacity={0.8}
     >
       <Icon name="album" size={25} color={colors.text} style={styles.icon} />
-      <Text style={[styles.itemTitle, { color: colors.text }]}>
-        {item.title}
-      </Text>
-      <TouchableOpacity onPress={deleteOnPress} style={styles.deleteButton}>
+      <Text style={rowNameStyle}>{item.title}</Text>
+      <TouchableOpacity
+        onPress={deleteOnPress}
+        style={deleteButtonStyle}
+        activeOpacity={0.7}
+      >
         <Icon name="delete-outline" size={25} color={colors.text} />
       </TouchableOpacity>
     </TouchableOpacity>
@@ -71,6 +87,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 8,
+    margin: 8,
   },
 })
 

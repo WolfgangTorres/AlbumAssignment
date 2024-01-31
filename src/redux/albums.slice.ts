@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { Album, AlbumsState } from '../utils/interfaces'
+import { Album, AlbumsState } from '../utils/types'
 import { fetchAlbums } from '../api/album.api'
 
 // Define the initial state of the albums module using the AlbumsState interface

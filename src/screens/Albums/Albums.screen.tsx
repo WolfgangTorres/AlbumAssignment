@@ -5,19 +5,25 @@
  * using a SectionList. It implements lazy loading of albums data when a user section is visible.
  */
 import React, { useCallback, useEffect } from 'react'
-import { SectionList, StyleSheet, ViewToken } from 'react-native'
+import { SectionList, StyleSheet, ViewToken, NativeModules } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { StackScreenProps } from '@react-navigation/stack'
 
-import { EmptyListComponent } from '../../components/shared'
+import { EmptyListComponent, HeaderButton } from '../../components/shared'
 import { RootState } from '../../redux/store'
 import { fetchAlbums } from '../../api/album.api'
 import { fetchUsers } from '../../api/user.api'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 import { AlbumItem, AlbumSectionHeader } from '../../components/Albums'
 import { deleteAlbum } from '../../redux/albums.slice'
+import { RootStackParamList } from '../../utils/types'
 
-const AlbumsScreen: React.FC = () => {
+const { AlertModule } = NativeModules
+
+const AlbumsScreen: React.FC<
+  StackScreenProps<RootStackParamList, 'Albums'>
+> = ({ navigation }) => {
   // Dispatch and theme hooks
   const dispatch = useAppDispatch()
   const { colors } = useTheme()
@@ -33,12 +39,35 @@ const AlbumsScreen: React.FC = () => {
     status: albumsStatus,
   } = useAppSelector((state: RootState) => state.albums)
 
+  /**
+   * headerRight
+   *
+   * The component to be rendered in the navigation header's right side. It toggles the native module.
+   */
+  const headerRight = useCallback(
+    () => (
+      <HeaderButton
+        onPress={() => AlertModule.showAlert('This is a native alert!')}
+        icon="circle-notifications"
+      />
+    ),
+    [],
+  )
+
   // Fetch users on component mount
   useEffect(() => {
     if (usersStatus === 'idle') {
       dispatch(fetchUsers())
     }
   }, [dispatch, usersStatus])
+
+  // Use useEffect to set the options on the navigation header
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: headerRight,
+      headerTintColor: colors.text,
+    })
+  }, [navigation, headerRight, colors])
 
   /**
    * Callback for handling the visibility change of items in the SectionList.

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import api from './api'
-import { Photo } from '../utils/interfaces'
+import { Photo } from '../utils/types'
 
 export const fetchAlbumPhotos = createAsyncThunk(
   'photos/fetchAlbumPhotos',

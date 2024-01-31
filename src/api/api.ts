@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import { User, Album, Photo } from '../utils/interfaces'
+import { User, Album, Photo } from '../utils/types'
 
 // Base URL for the API
 const baseURL = 'https://jsonplaceholder.typicode.com'

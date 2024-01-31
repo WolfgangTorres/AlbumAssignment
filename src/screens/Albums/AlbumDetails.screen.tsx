@@ -11,12 +11,12 @@ import { useTheme } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { RootStackParamList } from '../../utils/interfaces'
+import { RootStackParamList } from '../../utils/types'
 import { RootState } from '../../redux/store'
 import { fetchAlbumPhotos, fetchAllPhotos } from '../../api/photo.api'
 import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 import { EmptyListComponent } from '../../components/shared'
-import { HeaderButton } from '../../components/Albums'
+import { HeaderButton } from '../../components/shared'
 
 const { width } = Dimensions.get('window')
 const marginSize = 1
@@ -25,7 +25,7 @@ const photoSize = (width - marginSize * 2 * 3) / 3 // 3 items per row, margin on
 const AlbumDetailsScreen: React.FC<
   StackScreenProps<RootStackParamList, 'AlbumDetails'>
 > = ({ route, navigation }) => {
-  const { albumId } = route.params
+  const { album } = route.params
 
   // useDispatch hook to dispatch actions to the Redux store
   const dispatch = useAppDispatch()
@@ -50,7 +50,7 @@ const AlbumDetailsScreen: React.FC<
     () => (
       <HeaderButton
         onPress={() => setShowAllPhotos((prevState) => !prevState)}
-        isStarred={showAllPhotos}
+        icon={showAllPhotos ? 'star' : 'star-border'}
       />
     ),
     [showAllPhotos],
@@ -58,27 +58,27 @@ const AlbumDetailsScreen: React.FC<
 
   // Effect to fetch photos based on the albumId or fetch all photos
   useEffect(() => {
-    if (albumId && !showAllPhotos) {
-      dispatch(fetchAlbumPhotos(albumId)) // Fetch photos for a specific album
+    if (album.id && !showAllPhotos) {
+      dispatch(fetchAlbumPhotos(album.id)) // Fetch photos for a specific album
     } else {
       dispatch(fetchAllPhotos()) // Fetch all photos
     }
-  }, [dispatch, albumId, showAllPhotos])
+  }, [dispatch, album.id, showAllPhotos])
 
   // Use useEffect to set the options on the navigation header
   useEffect(() => {
     navigation.setOptions({
-      title: showAllPhotos ? 'All Photos' : `Album ${albumId}`,
+      title: showAllPhotos ? 'All Photos' : album.title,
       headerRight: headerRight,
       headerTintColor: colors.text,
     })
-  }, [navigation, showAllPhotos, albumId, headerRight, colors.text])
+  }, [navigation, showAllPhotos, album.title, headerRight, colors.text])
 
   /**
    * Preparing the data for the photo grid. If it's showing all photos, use allPhotos from the state; otherwise,
    * use photos from the specific album. Add empty items if necessary to ensure the layout of incomplete rows is consistent.
    */
-  const photos = showAllPhotos ? allPhotos : photosByAlbum[albumId] || []
+  const photos = showAllPhotos ? allPhotos : photosByAlbum[album.id] || []
   // Calculate the number of empty items needed to fill the last row
   const totalItems = photos.length
   const itemsPerRow = 3

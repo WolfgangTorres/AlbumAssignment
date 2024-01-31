@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { PhotosState } from '../utils/interfaces'
+import { PhotosState } from '../utils/types'
 import { fetchAlbumPhotos, fetchAllPhotos } from '../api/photo.api'
 
 // Define the initial state of the photos module using the PhotosState interface

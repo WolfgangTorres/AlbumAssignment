@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import AlbumsScreen from '../screens/Albums/Albums.screen'
 import AlbumDetailsScreen from '../screens/Albums/AlbumDetails.screen'
-import { RootStackParamList } from '../utils/interfaces'
+import { RootStackParamList } from '../utils/types'
 
 // Create a Stack Navigator with a parameter list for type safety.
 const Stack = createStackNavigator<RootStackParamList>()
