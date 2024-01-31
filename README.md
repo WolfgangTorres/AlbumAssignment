@@ -1,5 +1,25 @@
 # Getting Started
 
+## Prerequisites
+
+Before running the application, you need to install the necessary dependencies and set up the environment.
+
+### Install Dependencies
+
+Navigate to the project's root directory and run the following command to install the necessary dependencies:
+
+```bash
+yarn
+```
+
+### Install iOS Pods
+
+For iOS development, navigate to the iOS directory and install the CocoaPods:
+
+```bash
+cd ios/ && pod install && cd ..
+```
+
 ## Step 1: Start the Metro Server
 
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
